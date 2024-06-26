@@ -1,7 +1,7 @@
 defmodule ExVision.Mixfile do
   use Mix.Project
 
-  @version "0.2.1"
+  @version "0.3.0"
   @github_url "https://github.com/membraneframework-labs/ex_vision/"
 
   def project do
@@ -99,6 +99,7 @@ defmodule ExVision.Mixfile do
           ExVision.Classification.EfficientNet_V2_L,
           ExVision.Classification.SqueezeNet1_1,
           ExVision.SemanticSegmentation.DeepLabV3_MobileNetV3,
+          ExVision.InstanceSegmentation.MaskRCNN_ResNet50_FPN_V2,
           ExVision.ObjectDetection.Ssdlite320_MobileNetv3,
           ExVision.ObjectDetection.FasterRCNN_ResNet50_FPN
         ],
@@ -119,6 +120,7 @@ defmodule ExVision.Mixfile do
         ExVision.Types,
         ExVision.Classification,
         ExVision.SemanticSegmentation,
+        ExVision.InstanceSegmentation,
         ExVision.ObjectDetection
       ],
       formatters: ["html"],
