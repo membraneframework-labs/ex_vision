@@ -1,6 +1,6 @@
 defmodule ExVision.Types.BBox do
   @moduledoc """
-  A struct describing the bounding box returned by the detection model.
+  A struct describing the bounding box returned by the object detection model.
   """
 
   @enforce_keys [:x1, :y1, :x2, :y2, :label, :score]

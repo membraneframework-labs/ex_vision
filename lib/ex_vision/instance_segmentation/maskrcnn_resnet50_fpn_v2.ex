@@ -6,9 +6,24 @@ defmodule ExVision.InstanceSegmentation.MaskRCNN_ResNet50_FPN_V2 do
     model: "maskrcnn_resnet50_fpn_v2_instance_segmentation.onnx",
     categories: "priv/categories/coco_categories.json"
 
+  require Logger
+
   alias ExVision.Types.BBoxWithMask
 
   @type output_t() :: [BBoxWithMask.t()]
+
+  @impl true
+  def load(options \\ []) do
+    if Keyword.has_key?(options, :batch_size) do
+      Logger.warning(
+        "`:max_batch_size` was given, but this model can only process batch of size 1. Overriding"
+      )
+    end
+
+    options
+    |> Keyword.put(:batch_size, 1)
+    |> default_model_load()
+  end
 
   @impl true
   def preprocessing(img, _metdata) do
