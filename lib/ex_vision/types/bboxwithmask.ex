@@ -26,7 +26,7 @@ defmodule ExVision.Types.BBoxWithMask do
   - `x2` - x componenet of the lower right
   - `y2` - y componenet of the lower right
   - `score` - confidence of the predition
-  - `label` - label assigned to this bounding box.
+  - `label` - label assigned to this bounding box
   - `mask` - binary mask
   """
   @type t(label_t) :: %__MODULE__{

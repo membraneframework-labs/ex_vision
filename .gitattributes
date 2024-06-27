@@ -1,6 +1,7 @@
 models/**/*.onnx filter=lfs diff=lfs merge=lfs -text
 models/deeplab_v3_mobilenetv3_segmentation.onnx filter=lfs diff=lfs merge=lfs -text
 models/maskrcnn_resnet50_fpn_v2_instance_segmentation.onnx filter=lfs diff=lfs merge=lfs -text
+models/keypointrcnn_resnet50_fpn_keypoint_detector.onnx filter=lfs diff=lfs merge=lfs -text
 models/fasterrcnn_resnet50_fpn_object_detector.onnx filter=lfs diff=lfs merge=lfs -text
 models/mobilenetv3small-classifier.onnx filter=lfs diff=lfs merge=lfs -text
 models/efficientnet_v2_s_classifier.onnx filter=lfs diff=lfs merge=lfs -text

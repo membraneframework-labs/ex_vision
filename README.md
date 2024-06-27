@@ -66,7 +66,7 @@ The package can be installed by adding `ex_vision` to your list of dependencies 
 ```elixir
 def deps do
   [
-    {:ex_vision, "~> 0.3.0"}
+    {:ex_vision, "~> 0.4.0"}
   ]
 end
 ```
@@ -89,8 +89,8 @@ If the model that you would like to use is missing, feel free to open the issue,
   - [x] DeepLabV3 - MobileNetV3
 - [x] Instance segmentation
   - [x] Mask R-CNN
-- [ ] Keypoint Detection
-  - [ ] Keypoint R-CNN
+- [x] Keypoint Detection
+  - [x] Keypoint R-CNN
 
 ## Copyright and License
 
