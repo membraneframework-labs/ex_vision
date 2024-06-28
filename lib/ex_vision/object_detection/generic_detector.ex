@@ -1,8 +1,8 @@
-defmodule ExVision.Detection.GenericDetector do
+defmodule ExVision.ObjectDetection.GenericDetector do
   @moduledoc false
 
   # Contains a default implementation of pre and post processing for TorchVision detectors
-  # To use: `use ExVision.Detection.GenericDetector`
+  # To use: `use ExVision.ObjectDetection.GenericDetector`
 
   require Logger
 
@@ -17,7 +17,11 @@ defmodule ExVision.Detection.GenericDetector do
 
   @spec postprocessing(map(), ImageMetadata.t(), [atom()]) :: output_t()
   def postprocessing(
-        %{"boxes" => bboxes, "scores" => scores, "labels" => labels},
+        %{
+          "boxes_unsqueezed" => bboxes,
+          "scores_unsqueezed" => scores,
+          "labels_unsqueezed" => labels
+        },
         metadata,
         categories
       ) do
@@ -27,13 +31,14 @@ defmodule ExVision.Detection.GenericDetector do
 
     bboxes =
       bboxes
+      |> Nx.squeeze(axes: [0])
       |> Nx.multiply(Nx.tensor([scale_x, scale_y, scale_x, scale_y]))
       |> Nx.round()
       |> Nx.as_type(:s64)
       |> Nx.to_list()
 
-    scores = scores |> Nx.to_list()
-    labels = labels |> Nx.to_list()
+    scores = scores |> Nx.squeeze(axes: [0]) |> Nx.to_list()
+    labels = labels |> Nx.squeeze(axes: [0]) |> Nx.to_list()
 
     [bboxes, scores, labels]
     |> Enum.zip()
@@ -62,12 +67,12 @@ defmodule ExVision.Detection.GenericDetector do
       @type output_t() :: [BBox.t()]
 
       @impl true
-      defdelegate preprocessing(image, metadata), to: ExVision.Detection.GenericDetector
+      defdelegate preprocessing(image, metadata), to: ExVision.ObjectDetection.GenericDetector
 
       @impl true
-      @spec postprocessing(tuple(), ExVision.Types.ImageMetadata.t()) :: output_t()
+      @spec postprocessing(map(), ExVision.Types.ImageMetadata.t()) :: output_t()
       def postprocessing(output, metadata) do
-        ExVision.Detection.GenericDetector.postprocessing(output, metadata, categories())
+        ExVision.ObjectDetection.GenericDetector.postprocessing(output, metadata, categories())
       end
 
       defoverridable preprocessing: 2, postprocessing: 2

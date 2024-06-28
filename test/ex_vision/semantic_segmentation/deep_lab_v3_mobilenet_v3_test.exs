@@ -1,5 +1,5 @@
-defmodule ExVision.Segmentation.DeepLabV3_MobileNetV3Test do
-  use ExVision.Model.Case, module: ExVision.Segmentation.DeepLabV3_MobileNetV3
+defmodule ExVision.SemanticSegmentation.DeepLabV3_MobileNetV3Test do
+  use ExVision.Model.Case, module: ExVision.SemanticSegmentation.DeepLabV3_MobileNetV3
   use ExVision.TestUtils
 
   @impl true

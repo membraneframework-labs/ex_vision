@@ -64,7 +64,7 @@ With that knowledge, let's implement the Membrane Filter that will be responsibl
 defmodule Membrane.ExVision.Detector do
   use Membrane.Filter
 
-  alias ExVision.Detection.Ssdlite320_MobileNetv3, as: Model
+  alias ExVision.ObjectDetection.Ssdlite320_MobileNetv3, as: Model
   alias ExVision.Types.BBox
 
   # Define both input and output pads

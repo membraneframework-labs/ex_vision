@@ -79,7 +79,7 @@ defmodule ExVision.Model.Case do
 
         assert unquote(opts[:module]).batched_run(
                  __MODULE__.TestProcess1,
-                 Nx.iota({3, 124, 124}, type: :u8)
+                 unquote(@img_path)
                )
       end
     end

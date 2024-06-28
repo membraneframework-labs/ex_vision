@@ -33,12 +33,12 @@ The main objective of ExVision is ease of use. This sacrifices some control over
 
 ```elixir
 alias ExVision.Classification.MobileNetV3Small, as: Classifier
-alias ExVision.Detection.FasterRCNN_ResNet50_FPN, as: Detector
-alias ExVision.Segmentation.DeepLabV3_MobileNetV3, as: Segmentation
+alias ExVision.ObjectDetection.FasterRCNN_ResNet50_FPN, as: ObjectDetector
+alias ExVision.SemanticSegmentation.DeepLabV3_MobileNetV3, as: SemanticSegmentation
 
 {:ok, classifier} = Classifier.load()
-{:ok, detector} = Detector.load()
-{:ok, segmentation} = Segmentation.load()
+{:ok, object_detector} = ObjectDetector.load()
+{:ok, semantic_segmentation} = SemanticSegmentation.load()
 
 Kino.nothing()
 ```
@@ -161,7 +161,7 @@ alias ExVision.Types.BBox
 # apply the model
 prediction =
   image
-  |> then(&Detector.run(detector, &1))
+  |> then(&ObjectDetector.run(object_detector, &1))
   # Find the biggest object by area
   |> Enum.max_by(&(BBox.width(&1) * BBox.height(&1)))
   |> dbg()
@@ -197,7 +197,7 @@ uniform_black = 0 |> Nx.broadcast(Nx.shape(nx_image)) |> Nx.as_type(Nx.type(nx_i
 
 predictions =
   image
-  |> then(&Segmentation.run(segmentation, &1))
+  |> then(&SemanticSegmentation.run(semantic_segmentation, &1))
   # Filter out masks covering less than 5% of the total image area
   |> Enum.filter(fn {_label, mask} ->
     mask |> Nx.mean() |> Nx.to_number() > 0.05

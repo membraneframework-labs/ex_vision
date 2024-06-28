@@ -1,12 +1,12 @@
-defmodule ExVision.Detection.Ssdlite320_MobileNetv3 do
+defmodule ExVision.ObjectDetection.Ssdlite320_MobileNetv3 do
   @moduledoc """
   SSDLite320 object detector with MobileNetV3 Large architecture, exported from torchvision.
   """
   use ExVision.Model.Definition.Ortex,
-    model: "ssdlite320_mobilenetv3_detector.onnx",
+    model: "ssdlite320_mobilenet_v3_large_object_detector.onnx",
     categories: "priv/categories/coco_categories.json"
 
-  use ExVision.Detection.GenericDetector
+  use ExVision.ObjectDetection.GenericDetector
 
   require Logger
 

@@ -66,7 +66,7 @@ The package can be installed by adding `ex_vision` to your list of dependencies 
 ```elixir
 def deps do
   [
-    {:ex_vision, "~> 0.2.0"}
+    {:ex_vision, "~> 0.4.0"}
   ]
 end
 ```
@@ -87,10 +87,10 @@ If the model that you would like to use is missing, feel free to open the issue,
   - [x] FasterRCNN ResNet50 FPN
 - [x] Semantic segmentation
   - [x] DeepLabV3 - MobileNetV3
-- [ ] Instance segmentation
-  - [ ] Mask R-CNN
-- [ ] Keypoint Detection
-  - [ ] Keypoint R-CNN
+- [x] Instance segmentation
+  - [x] Mask R-CNN
+- [x] Keypoint Detection
+  - [x] Keypoint R-CNN
 
 ## Copyright and License
 

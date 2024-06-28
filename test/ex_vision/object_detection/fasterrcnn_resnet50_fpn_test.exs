@@ -1,5 +1,5 @@
-defmodule ExVision.Detection.FasterRCNN_ResNet50_FPN_Test do
-  use ExVision.Model.Case, module: ExVision.Detection.FasterRCNN_ResNet50_FPN
+defmodule ExVision.ObjectDetection.FasterRCNN_ResNet50_FPN_Test do
+  use ExVision.Model.Case, module: ExVision.ObjectDetection.FasterRCNN_ResNet50_FPN
   use ExVision.TestUtils
   alias ExVision.Types.BBox
 
