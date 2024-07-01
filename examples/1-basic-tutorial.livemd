@@ -35,10 +35,12 @@ The main objective of ExVision is ease of use. This sacrifices some control over
 alias ExVision.Classification.MobileNetV3Small, as: Classifier
 alias ExVision.ObjectDetection.FasterRCNN_ResNet50_FPN, as: ObjectDetector
 alias ExVision.SemanticSegmentation.DeepLabV3_MobileNetV3, as: SemanticSegmentation
+alias ExVision.InstanceSegmentation.MaskRCNN_ResNet50_FPN_V2, as: InstanceSegmentation
 
 {:ok, classifier} = Classifier.load()
 {:ok, object_detector} = ObjectDetector.load()
 {:ok, semantic_segmentation} = SemanticSegmentation.load()
+{:ok, instance_segmentation} = InstanceSegmentation.load()
 
 Kino.nothing()
 ```
@@ -206,6 +208,46 @@ predictions =
 
 predictions
 |> Enum.map(fn {label, mask} ->
+  # expand the mask to cover all channels
+  mask = Nx.broadcast(mask, Nx.shape(nx_image), axes: [0, 1])
+
+  # Cut out the mask from the original image
+  image = Nx.select(mask, nx_image, uniform_black)
+  image = Nx.as_type(image, :u8)
+
+  Kino.Layout.grid([
+    label |> Atom.to_string() |> Kino.Text.new(),
+    Kino.Image.new(image)
+  ])
+end)
+|> Kino.Layout.grid(columns: 2)
+```
+
+## Instance segmentation
+
+The objective of instance segmentation is to not only identify objects within an image on a per-pixel basis but also differentiate each specific object of the same class.
+
+In ExVision, the output of instance segmentation models includes a bounding box with a label and a score (similar to object detection), and a binary mask for every instance detected in the image.
+
+### Code example
+
+In the following example, we will pass an image through the instance segmentation model and examine the individual instance masks recognized by the model.
+
+```elixir
+alias ExVision.Types.BBoxWithMask
+
+nx_image = Image.to_nx!(image)
+uniform_black = 0 |> Nx.broadcast(Nx.shape(nx_image)) |> Nx.as_type(Nx.type(nx_image))
+
+predictions =
+  image
+  |> then(&InstanceSegmentation.run(instance_segmentation, &1))
+  # Get most likely predictions from the output
+  |> Enum.filter(fn %BBoxWithMask{score: score} -> score > 0.8 end)
+  |> dbg()
+
+predictions
+|> Enum.map(fn %BBoxWithMask{label: label, mask: mask} ->
   # expand the mask to cover all channels
   mask = Nx.broadcast(mask, Nx.shape(nx_image), axes: [0, 1])
 
