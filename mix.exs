@@ -1,7 +1,7 @@
 defmodule ExVision.Mixfile do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.2.0"
   @github_url "https://github.com/membraneframework-labs/ex_vision/"
 
   def project do

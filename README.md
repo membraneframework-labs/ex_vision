@@ -66,7 +66,7 @@ The package can be installed by adding `ex_vision` to your list of dependencies 
 ```elixir
 def deps do
   [
-    {:ex_vision, "~> 0.3.0"}
+    {:ex_vision, "~> 0.2.0"}
   ]
 end
 ```
