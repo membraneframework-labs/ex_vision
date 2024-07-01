@@ -1,4 +1,4 @@
-defmodule ExVision.Segmentation.DeepLabV3_MobileNetV3 do
+defmodule ExVision.SemanticSegmentation.DeepLabV3_MobileNetV3 do
   @moduledoc """
   A semantic segmentation model for MobileNetV3 Backbone. Exported from torchvision.
   """

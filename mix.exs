@@ -98,9 +98,9 @@ defmodule ExVision.Mixfile do
           ExVision.Classification.EfficientNet_V2_M,
           ExVision.Classification.EfficientNet_V2_L,
           ExVision.Classification.SqueezeNet1_1,
-          ExVision.Segmentation.DeepLabV3_MobileNetV3,
-          ExVision.Detection.Ssdlite320_MobileNetv3,
-          ExVision.Detection.FasterRCNN_ResNet50_FPN
+          ExVision.SemanticSegmentation.DeepLabV3_MobileNetV3,
+          ExVision.ObjectDetection.Ssdlite320_MobileNetv3,
+          ExVision.ObjectDetection.FasterRCNN_ResNet50_FPN
         ],
         Types: [
           ExVision.Types,
@@ -118,8 +118,8 @@ defmodule ExVision.Mixfile do
         ExVision.Model.Definition,
         ExVision.Types,
         ExVision.Classification,
-        ExVision.Segmentation,
-        ExVision.Detection
+        ExVision.SemanticSegmentation,
+        ExVision.ObjectDetection
       ],
       formatters: ["html"],
       source_ref: "v#{@version}"
