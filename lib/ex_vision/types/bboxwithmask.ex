@@ -1,16 +1,25 @@
-defmodule ExVision.Types.BBox do
+defmodule ExVision.Types.BBoxWithMask do
   @moduledoc """
-  A struct describing the bounding box returned by the object detection model.
+  A struct describing the bounding box with mask returned by the instance segmentation model.
   """
 
-  @enforce_keys [:x1, :y1, :x2, :y2, :label, :score]
+  @enforce_keys [
+    :x1,
+    :y1,
+    :x2,
+    :y2,
+    :label,
+    :score,
+    :mask
+  ]
   defstruct @enforce_keys
 
   @typedoc """
-  A type describing the Bounding Box object.
+  A type describing the Bounding Box with Mask object.
 
   Bounding box is a rectangle encompassing the region.
-  When used in object detectors, this box will describe the location of the object in the image.
+  When used in instance segmentation, this box will describe the location of the object in the image.
+  Additionally, a binary mask represents the instance segmentation of the object.
 
   - `x1` - x componenet of the upper left corner
   - `y1` - y componenet of the upper left corner
@@ -18,6 +27,7 @@ defmodule ExVision.Types.BBox do
   - `y2` - y componenet of the lower right
   - `score` - confidence of the predition
   - `label` - label assigned to this bounding box.
+  - `mask` - binary mask
   """
   @type t(label_t) :: %__MODULE__{
           x1: number(),
@@ -25,7 +35,8 @@ defmodule ExVision.Types.BBox do
           y2: number(),
           x2: number(),
           label: label_t,
-          score: number()
+          score: number(),
+          mask: Nx.tensor()
         }
 
   @typedoc """

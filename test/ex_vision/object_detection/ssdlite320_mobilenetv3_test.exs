@@ -1,5 +1,5 @@
-defmodule ExVision.Detection.Ssdlite320_MobileNetv3Test do
-  use ExVision.Model.Case, module: ExVision.Detection.Ssdlite320_MobileNetv3
+defmodule ExVision.ObjectDetection.Ssdlite320_MobileNetv3Test do
+  use ExVision.Model.Case, module: ExVision.ObjectDetection.Ssdlite320_MobileNetv3
   use ExVision.TestUtils
 
   alias ExVision.Types.BBox
